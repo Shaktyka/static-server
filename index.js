@@ -15,11 +15,13 @@ app.set(`view engine`, `hbs`); // начинаем его использоват
 app.set(`views`, `views`); // где лежать все шаблоны
 
 app.get(`/`, (req, res) => {
-  res.sendFile(path.join(__dirname, `views`, `index.html`));
+  // res.sendFile(path.join(__dirname, `views`, `index.html`));
+  res.render(`index`);
 });
 
 app.get(`/about`, (req, res) => {
-  res.sendFile(path.join(__dirname, `views`, `about.html`));
+  // res.sendFile(path.join(__dirname, `views`, `about.html`));
+  res.render(`about`);
 });
 
 app.listen(PORT, () => {
