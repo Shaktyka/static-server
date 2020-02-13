@@ -3,11 +3,19 @@ const fs = require(`fs`);
 const path = require(`path`);
 
 class Course {
-  constructor(title, price, imageUrl) {
+  constructor(title, price, img) {
     this.title = title;
     this.price = price;
-    this.image = imageUrl;
+    this.img = img;
     this.id = uuid();
+  }
+
+  toJSON() {
+    return JSON.stringify({
+      title: this.title,
+      price: this.price,
+      img: this.img
+    });
   }
 
   async save() {
@@ -17,7 +25,7 @@ class Course {
 
   static getAll() {
 
-    return new Promise((res, rej) => {
+    return new Promise((resolve, reject) => {
       fs.readFile(
         path.join(__dirname, `../data/courses.json`),
         `utf-8`,
@@ -26,7 +34,7 @@ class Course {
             reject(err);
           } else {
             console.log(content);
-            // resolve(JSON.parse(content));
+            resolve(JSON.parse(content));
           }
         }
       )
