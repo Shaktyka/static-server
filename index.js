@@ -18,6 +18,7 @@ app.set(`view engine`, `hbs`); // начинаем его использоват
 app.set(`views`, `views`); // где лежат все шаблоны
 
 app.use(express.static(`public`)); // сделали папку public статической
+app.use(express.urlencoded({extended: true}));
 app.use(`/`, homeRoutes);
 app.use(`/add`, addRoutes);
 app.use(`/courses`, coursesRoutes);
