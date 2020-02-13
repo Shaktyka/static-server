@@ -19,10 +19,10 @@ class Course {
   }
 
   async save() {
-    const courses = await Course.getAll();
+    const courses = await Course.getAll() || [];
     courses.push(this.toJSON());
 
-    return new Promice((resolve, reject) => {
+    return new Promise((resolve, reject) => {
       fs.writeFile(
         path.join(__dirname, `..`, `data`, `courses.json`),
         JSON.stringify(courses),
@@ -47,6 +47,7 @@ class Course {
           if (err) {
             reject(err);
           } else {
+            console.log(content);
             resolve(JSON.parse(content));
           }
         }
