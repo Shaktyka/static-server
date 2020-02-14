@@ -14,7 +14,8 @@ class Course {
     return {
       title: this.title,
       price: this.price,
-      img: this.img
+      img: this.img,
+      id: this.id
     };
   }
 
@@ -37,6 +38,13 @@ class Course {
     });
   }
 
+  static async getById(id) {
+    const courses = await Course.getAll();
+    return courses.find((course) => {
+      return course.id === id;
+    });
+  }
+
   static getAll() {
 
     return new Promise((resolve, reject) => {
@@ -47,7 +55,6 @@ class Course {
           if (err) {
             reject(err);
           } else {
-            console.log(content);
             resolve(JSON.parse(content));
           }
         }
